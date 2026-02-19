@@ -1,3 +1,6 @@
 from django.contrib import admin
+from builds.models import PCBuild
 
-# Register your models here.
+@admin.register(PCBuild)
+class PCBuildAdmin(admin.ModelAdmin):
+    ...
