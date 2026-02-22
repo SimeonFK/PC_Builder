@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<h2>{{ component.name }}</h2>
+
+<p><strong>Brand:</strong> {{ component.brand }}</p>
+<p><strong>Category:</strong> {{ component.category }}</p>
+<p><strong>Price:</strong> {{ component.price }} $</p>
+<p>{{ component.description }}</p>
+
+<p>
+    <a href="{% url 'component-delete' component.pk %}">Delete</a>
+</p>
+
+<a href="{% url 'component-list' %}">Back to components</a>
+<a href="{% url 'component-edit' component.pk %}" class="btn btn-warning">
+    Edit
+</a>
+{% endblock %}

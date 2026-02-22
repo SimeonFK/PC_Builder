@@ -8,6 +8,12 @@ class PCBuild(models.Model):
         ASK = 'ASK','ASK'
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    components = models.ManyToManyField(Component, related_name="pcbuilds_components")
+    components = models.ManyToManyField(
+        Component,
+        related_name="pc_builds")
     created_at = models.DateTimeField(auto_now_add=True)
-    for_sale = models.CharField(max_length=100,choices=ForSaleChoices.choices, default=ForSaleChoices.AVAILABLE)
+    for_sale = models.CharField(max_length=100,
+        choices=ForSaleChoices.choices,
+        default=ForSaleChoices.AVAILABLE)
+    def __str__(self):
+        return f"{self.name} - {self.for_sale}"
