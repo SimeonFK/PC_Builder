@@ -19,6 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('components.urls')),
-    path('builds/',include('builds.urls')),
+    path('', include('common.urls')),
+    path('components/', include('components.urls')),
+    path('builds/', include('builds.urls')),
 ]
+handler404 = 'common.views.custom_404_view'

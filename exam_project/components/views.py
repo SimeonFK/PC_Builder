@@ -11,25 +11,14 @@ class ComponentListView(ListView):
     template_name = 'components/list.html'
     context_object_name = 'components'
 
-    def get_query(self):
-        components_q = Component.objects.all()
-
-        category = self.request.GET.get('category')
-        tag = self.request.GET.get('tag')
+    def get_queryset(self):
+        queryset = super().get_queryset()
         order = self.request.GET.get('order')
 
-        if category:
-            components_q = components_q.filter(category__id=category)
+        if order in ['price', '-price']:
+            queryset = queryset.order_by(order)
 
-        if tag:
-            components_q = components_q.filter(tags__id=tag)
-
-        if order == 'price':
-            components_q = components_q.order_by('price')
-        elif order == '-price':
-            components_q = components_q.order_by('-price')
-
-        return components_q
+        return queryset
 
 class ComponentDetailView(DetailView):
     model = Component
@@ -40,7 +29,7 @@ class ComponentCreateView(CreateView):
     model = Component
     form_class = ComponentForm
     template_name = 'components/form.html'
-    success_url = reverse_lazy('list')
+    success_url = reverse_lazy('components:list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,7 +40,7 @@ class ComponentUpdateView(UpdateView):
     model = Component
     form_class = ComponentForm
     template_name = 'components/form.html'
-    success_url = reverse_lazy('list')
+    success_url = reverse_lazy('components:list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -63,8 +52,10 @@ def component_delete(request, pk):
 
     if request.method == 'POST':
         component.delete()
-        return redirect('list')
+        return redirect('components:list')
 
-    return render(request, 'components/confirm_delete.html', {
-        'component': component
-    })
+    return render(
+        request,
+        'components/confirm_delete.html',
+        {'component': component}
+    )

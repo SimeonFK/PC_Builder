@@ -3,11 +3,11 @@
 {% block content %}
 <h2>Confirm delete</h2>
 
-<p>Are you sure you want to delete "{{ component.brand }}"?</p>
+<p>Are you sure you want to delete "{{ build.name }}"?</p>
 
 <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Yes, delete</button>
-    <a href="{% url 'components:detail' component.pk %}">Cancel</a>
+    <a href="{% url 'builds:detail' build.pk %}">Cancel</a>
 </form>
 {% endblock %}

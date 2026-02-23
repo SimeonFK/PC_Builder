@@ -9,23 +9,19 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" href="/">PC Builder</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/components/">Components</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/builds/">Builds</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about/">About</a>
-                </li>
-            </ul>
-        </div>
+        <a class="navbar-brand" href="{% url 'common:home' %}">PC Builder</a>
+
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'components:list' %}">Components</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'builds:list' %}">Builds</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'common:about' %}">About</a>
+            </li>
+        </ul>
     </div>
 </nav>
 
@@ -35,9 +31,7 @@
 </div>
 
 <footer class="bg-light text-center py-3 mt-5">
-    <p class="mb-0">
-        //{{ year|default:"2026" }} PC Builder Project//
-    </p>
+    <p class="mb-0">//2026 PC Builder Project//</p>
 </footer>
 
 </body>

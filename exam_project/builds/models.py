@@ -15,5 +15,9 @@ class PCBuild(models.Model):
     for_sale = models.CharField(max_length=100,
         choices=ForSaleChoices.choices,
         default=ForSaleChoices.AVAILABLE)
+    image = models.URLField(
+        null=True,
+        default=''
+    )
     def __str__(self):
         return f"{self.name} - {self.for_sale}"

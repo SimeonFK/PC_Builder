@@ -1,0 +1,30 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<h1>PC Builds</h1>
+
+<a href="{% url 'builds:create' %}" class="btn btn-primary mb-3">
+    Create Build
+</a>
+
+<ul class="list-unstyled">
+    {% for build in builds %}
+        <li class="mb-3 d-flex align-items-center">
+             {% if build.image %}
+                <img src="{{ build.image}}"
+                     alt="{{ build.name }}"
+                     style="width: 50px; height: 50px; object-fit: cover; margin-right: 15px;">
+            {% else %}
+                <img src="https://via.placeholder.com/50"
+                     alt="Default"
+                     style="margin-right: 15px;">
+            {% endif %}
+            <a href="{% url 'builds:detail' build.pk %}">
+                {{ build.name }} – {{ build.for_sale }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No builds available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

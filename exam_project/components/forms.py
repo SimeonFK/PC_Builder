@@ -7,21 +7,20 @@ class ComponentForm(forms.ModelForm):
         model = Component
         fields = [
             'brand',
-            'price',
             'category',
             'tags',
-            'image',
-        ]
+            'price',
+            'image',]
+
         widgets = {
             'image': forms.URLInput(attrs={
-                'placeholder': 'Enter image URL (optional)'
-            })
+                'placeholder': 'Image URL (optional)'
+            }),
         }
+
         help_texts = {
-            'category': 'Select the component type (CPU, GPU, RAM, etc.)',
-            'tags': 'Optional tags used for filtering',
-            'image': 'Optional - URL to component image',
-        }
+            'category': 'Select component type (CPU, GPU, RAM, etc.)',
+            'tags': 'Used for filtering builds',}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

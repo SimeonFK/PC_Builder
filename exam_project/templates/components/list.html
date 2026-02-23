@@ -3,32 +3,28 @@
 {% block content %}
 <h1>Components</h1>
 
-<form method="get">
-    <label>
-        <select name="order">
-            <option value="">Sort by price</option>
-            <option value="price">Lowest first</option>
-            <option value="-price">Highest first</option>
-        </select>
-    </label>
+<a href="{% url 'components:create' %}" class="btn btn-primary mb-3">
+    Add Component
+</a>
 
+<form method="get" class="mb-3">
+    <select name="order">
+        <option value="">Sort by price</option>
+        <option value="price">Lowest first</option>
+        <option value="-price">Highest first</option>
+    </select>
     <button type="submit">Apply</button>
 </form>
-
-<hr>
 
 <ul>
     {% for component in components %}
         <li>
-            <a href="{% url 'component-detail' component.pk %}">
-                {{ component.name }} – {{ component.price }} $
+            <a href="{% url 'components:detail' component.pk %}">
+                {{ component.brand }} – {{ component.category.name }} – {{ component.price }} $
             </a>
         </li>
     {% empty %}
         <li>No components found.</li>
     {% endfor %}
 </ul>
-<a href="{% url 'component-create' %}" class="btn btn-primary mb-3">
-    Add Component
-</a>
 {% endblock %}
